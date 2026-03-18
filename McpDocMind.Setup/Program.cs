@@ -72,30 +72,37 @@ async Task FullInstallAsync()
     if (!Directory.Exists(InstallDir))
         Directory.CreateDirectory(InstallDir);
 
-    var sourceDir = AppContext.BaseDirectory;
-    var files = Directory.GetFiles(sourceDir, "*.*", SearchOption.AllDirectories)
-        .Where(f => !f.Contains("McpDocMind.Setup"))
-        .ToList();
+    var assembly = typeof(Program).Assembly;
+    var resourceName = "McpDocMind.Lite.exe";
+    var targetPath = Path.Combine(InstallDir, ExeName);
+
+    using var stream = assembly.GetManifestResourceStream(resourceName);
+    if (stream is null)
+    {
+        AnsiConsole.MarkupLine($"  [red]✘[/] Embedded resource '{resourceName}' not found in assembly.");
+        AnsiConsole.MarkupLine("[grey]  Available resources:[/]");
+        foreach (var name in assembly.GetManifestResourceNames())
+            AnsiConsole.MarkupLine($"    [grey]• {name}[/]");
+        return;
+    }
 
     await AnsiConsole.Progress()
         .StartAsync(async ctx =>
         {
-            var task = ctx.AddTask("[grey]Copying files...[/]");
-            var count = 0;
-            foreach (var file in files)
+            var task = ctx.AddTask("[grey]Extracting McpDocMind.Lite.exe...[/]");
+            await using var fileStream = File.Create(targetPath);
+            var buffer = new byte[81920];
+            long totalRead = 0;
+            int bytesRead;
+            while ((bytesRead = await stream.ReadAsync(buffer)) > 0)
             {
-                var relative = Path.GetRelativePath(sourceDir, file);
-                var target = Path.Combine(InstallDir, relative);
-                var targetDir = Path.GetDirectoryName(target);
-                if (targetDir != null && !Directory.Exists(targetDir)) Directory.CreateDirectory(targetDir);
-
-                File.Copy(file, target, true);
-                count++;
-                task.Value = (double)count / files.Count * 100;
+                await fileStream.WriteAsync(buffer.AsMemory(0, bytesRead));
+                totalRead += bytesRead;
+                task.Value = stream.Length > 0 ? (double)totalRead / stream.Length * 100 : 100;
             }
         });
 
-    AnsiConsole.MarkupLine($"  [green]✔[/] Copied {files.Count} files to {InstallDir}");
+    AnsiConsole.MarkupLine($"  [green]✔[/] Extracted {ExeName} to {InstallDir}");
 
     // Phase 2: Configuration
     AnsiConsole.MarkupLine("\n[bold]Phase 2: Tool Registration[/]");
