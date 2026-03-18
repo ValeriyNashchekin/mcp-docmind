@@ -1,6 +1,0 @@
-C:\Users\vmnas\source\repos\mcp-docmind\McpDocMind.Lite\bin\Release\net10.0\win-x64\publish\McpDocMind.Lite.pdb
-C:\Users\vmnas\source\repos\mcp-docmind\McpDocMind.Lite\bin\Release\net10.0\win-x64\publish\LocalEmbeddingsModel\default\model.onnx
-C:\Users\vmnas\source\repos\mcp-docmind\McpDocMind.Lite\bin\Release\net10.0\win-x64\publish\LocalEmbeddingsModel\default\vocab.txt
-C:\Users\vmnas\source\repos\mcp-docmind\McpDocMind.Lite\bin\Release\net10.0\win-x64\publish\onnxruntime.lib
-C:\Users\vmnas\source\repos\mcp-docmind\McpDocMind.Lite\bin\Release\net10.0\win-x64\publish\onnxruntime_providers_shared.lib
-C:\Users\vmnas\source\repos\mcp-docmind\McpDocMind.Lite\bin\Release\net10.0\win-x64\publish\McpDocMind.Lite.exe

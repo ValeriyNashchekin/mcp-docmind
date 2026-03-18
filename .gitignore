@@ -1,0 +1,40 @@
+# Build output
+bin/
+obj/
+out/
+publish/
+
+# IDE
+.idea/
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# NuGet
+*.nupkg
+project.lock.json
+project.fragment.lock.json
+
+# Node.js
+node_modules/
+
+# Claude Code / AI tools
+.claude/
+
+# Serena
+.serena/
+
+# OS
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Logs & databases
+*.log
+*.db
+debug.log
+
+# Temp
+Untitled.txt

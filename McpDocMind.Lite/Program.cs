@@ -30,6 +30,9 @@ Log($"[DocMind] Startup arguments: {string.Join(" ", args)}");
 
 var builder = Host.CreateApplicationBuilder(args);
 
+// Suppress default console logging to avoid polluting MCP stdout JSON-RPC channel
+builder.Logging.ClearProviders();
+
 // MCP server with stdio transport, auto-discover tools
 builder.Services
     .AddMcpServer()

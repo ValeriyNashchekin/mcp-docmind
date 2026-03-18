@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(ilspycmd \"C:\\\\Users\\\\vmnas\\\\.nuget\\\\packages\\\\modelcontextprotocol\\\\0.3.0-preview.1\\\\lib\\\\net8.0\\\\ModelContextProtocol.dll\" -o /tmp/mcp_decompiled)",
-      "Bash(ilspycmd \"C:\\\\Users\\\\vmnas\\\\.nuget\\\\packages\\\\modelcontextprotocol.core\\\\0.3.0-preview.1\\\\lib\\\\net8.0\\\\ModelContextProtocol.Core.dll\" -o /tmp/mcp_core_decompiled)"
-    ]
-  }
-}

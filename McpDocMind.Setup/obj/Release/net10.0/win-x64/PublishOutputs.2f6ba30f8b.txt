@@ -1,2 +1,0 @@
-C:\Users\vmnas\source\repos\GeminiDbTest\McpDocMind.Setup\publish\McpDocMind.Setup.pdb
-C:\Users\vmnas\source\repos\GeminiDbTest\McpDocMind.Setup\publish\McpDocMind.Setup.exe
