@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>McpDocMind.Lite</RootNamespace>
+    <AssemblyName>McpDocMind.Lite</AssemblyName>
+    <PublishSingleFile>true</PublishSingleFile>
+    <SelfContained>true</SelfContained>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <PublishTrimmed>true</PublishTrimmed>
+    <TrimMode>partial</TrimMode>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ModelContextProtocol" Version="0.3.0-preview.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.0-preview.5.25277.114" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.0-preview.5.25277.114" />
+    <PackageReference Include="Markdig" Version="0.39.1" />
+    <PackageReference Include="SmartComponents.LocalEmbeddings" Version="0.1.0-preview10148" />
+  </ItemGroup>
+
+  <!-- Embed the bundled TypeScript extraction script if it exists -->
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\extract-ts-api.bundle.js" Condition="Exists('Resources\extract-ts-api.bundle.js')" />
+    <None Include="Scripts\**" CopyToOutputDirectory="Never" />
+  </ItemGroup>
+
+</Project>

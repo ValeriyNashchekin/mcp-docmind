@@ -1,0 +1,15 @@
+[DocMind] Started at 3/18/2026 9:32:03 AM
+[DocMind] Startup arguments: ingest_repository --repo-url https://github.com/idm-as/FastBertTokenizer.git --library-name fast-bert-tokenizer --api-version 1.0.0 --parse-typescript false
+[GitDiscovery] --- Git Discovery Diagnostic ---
+[GitDiscovery] Step 3: Searching standard Windows locations...
+[GitDiscovery] Found Git at: C:\Program Files\Git\cmd\git.exe
+[GitDiscovery] --- Git Discovery Diagnostic ---
+[GitDiscovery] Step 3: Searching standard Windows locations...
+[GitDiscovery] Found Git at: C:\Program Files\Git\cmd\git.exe
+[GitDiscovery] --- Git Discovery Diagnostic ---
+[GitDiscovery] Step 3: Searching standard Windows locations...
+[GitDiscovery] Found Git at: C:\Program Files\Git\cmd\git.exe
+[GitDiscovery] --- Git Discovery Diagnostic ---
+[GitDiscovery] Step 3: Searching standard Windows locations...
+[GitDiscovery] Found Git at: C:\Program Files\Git\cmd\git.exe
+9:48:33 AM [GitRun] C:\Program Files\Git\cmd\git.exe clone --depth 1 --tags https://github.com/octocat/Spoon-Knife.git C:\Users\vmnas\AppData\Local\Temp\docmind-042c2480bc2c4baa8035087e602faa1b

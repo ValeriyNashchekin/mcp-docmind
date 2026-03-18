@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Bash(cd:*)",
+      "Bash(python -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(json.dumps\\(r, indent=2\\)\\) for r in d[''''relations''''][:10]]\")",
+      "Bash(sqlite3:*)",
+      "Bash(find:*)",
+      "Bash(python:*)",
+      "mcp__mcp-docmind__research_type",
+      "mcp__mcp-docmind__find_type_by_name",
+      "mcp__mcp-docmind__get_base_types",
+      "mcp__mcp-docmind__search",
+      "Bash(powershell -Command \"Stop-Process -Name McpDocMind.Lite -Force -ErrorAction SilentlyContinue\"; sleep 2; cp -v C:/Users/vmnas/source/repos/GeminiDbTest/McpDocMind.Lite/bin/Release/net10.0/win-x64/McpDocMind.Lite.exe \"$LOCALAPPDATA/McpDocMind/\" 2>&1)",
+      "mcp__mcp-docmind__list_libraries",
+      "Bash(powershell -Command \"Stop-Process -Name McpDocMind.Lite -Force -ErrorAction SilentlyContinue\"; sleep 2; echo \"Killed\")",
+      "mcp__mcp-docmind__ingest_repository",
+      "Bash(which:*)",
+      "Bash(powershell -Command \"[Environment]::GetEnvironmentVariable\\('PATH', 'Machine'\\)\" 2>&1 | tr ';' '\\\\n' | grep -i git)",
+      "Bash(\"$LOCALAPPDATA/McpDocMind/McpDocMind.Lite.exe\" --ingest list 2>&1 | head -3)",
+      "Bash(cmd //c \"$LOCALAPPDATA\\\\\\\\McpDocMind\\\\\\\\McpDocMind.Lite.exe --ingest list\" 2>&1 | head -5)",
+      "Bash(\"C:/Users/vmnas/AppData/Local/McpDocMind/McpDocMind.Lite.exe\" --ingest list 2>&1 | head -5)"
+    ]
+  }
+}

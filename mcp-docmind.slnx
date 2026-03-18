@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="McpDocMind.Lite/McpDocMind.Lite.csproj" />
+  <Project Path="McpDocMind.Setup/McpDocMind.Setup.csproj" />
+</Solution>

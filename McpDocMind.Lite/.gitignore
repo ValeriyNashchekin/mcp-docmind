@@ -1,0 +1,5 @@
+# Node.js dependencies (used for building TS extraction script)
+Scripts/node_modules/
+
+# Bundled script (built from Scripts/, embedded as resource)
+Resources/extract-ts-api.bundle.js
