@@ -12,7 +12,7 @@
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>mcp-docmind</ToolCommandName>
     <PackageId>McpDocMind</PackageId>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Authors>Valeriy Nashchokin</Authors>
     <Description>Interactive installer for McpDocMind — MCP server for .NET API documentation search. Ingests .NET DLLs, Markdown, Git repos into local SQLite and exposes hybrid search via Model Context Protocol.</Description>
     <PackageTags>mcp;dotnet;api;documentation;revit;autocad;ai;claude;gemini</PackageTags>
@@ -29,18 +29,20 @@
     <None Include="..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
-  <!-- Embed McpDocMind.Lite.exe as a resource -->
-  <ItemGroup>
-    <EmbeddedResource Include="..\McpDocMind.Lite\bin\Release\net10.0\win-x64\publish\McpDocMind.Lite.exe"
-                      Condition="Exists('..\McpDocMind.Lite\bin\Release\net10.0\win-x64\publish\McpDocMind.Lite.exe')">
-      <LogicalName>McpDocMind.Lite.exe</LogicalName>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <!-- Fail fast if Lite wasn't published -->
-  <Target Name="ValidateLitePublished" BeforeTargets="PrepareForBuild">
+  <!-- Create zip from Lite publish output, then embed it -->
+  <Target Name="CreateLiteZip" BeforeTargets="PrepareForBuild">
     <Error Condition="!Exists('..\McpDocMind.Lite\bin\Release\net10.0\win-x64\publish\McpDocMind.Lite.exe')"
            Text="McpDocMind.Lite.exe not found. Run: dotnet publish McpDocMind.Lite -c Release -r win-x64 first." />
+    <Delete Files="$(IntermediateOutputPath)McpDocMind.Lite.zip" Condition="Exists('$(IntermediateOutputPath)McpDocMind.Lite.zip')" />
+    <ZipDirectory SourceDirectory="..\McpDocMind.Lite\bin\Release\net10.0\win-x64\publish"
+                  DestinationFile="$(IntermediateOutputPath)McpDocMind.Lite.zip"
+                  Overwrite="true" />
   </Target>
+
+  <ItemGroup>
+    <EmbeddedResource Include="$(IntermediateOutputPath)McpDocMind.Lite.zip">
+      <LogicalName>McpDocMind.Lite.zip</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
 
 </Project>

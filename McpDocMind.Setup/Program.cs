@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.IO.Compression;
 using System.Text.Json;
 using Spectre.Console;
 using McpDocMind.Setup;
@@ -73,36 +74,35 @@ async Task FullInstallAsync()
         Directory.CreateDirectory(InstallDir);
 
     var assembly = typeof(Program).Assembly;
-    var resourceName = "McpDocMind.Lite.exe";
-    var targetPath = Path.Combine(InstallDir, ExeName);
+    var resourceName = "McpDocMind.Lite.zip";
 
     using var stream = assembly.GetManifestResourceStream(resourceName);
     if (stream is null)
     {
         AnsiConsole.MarkupLine($"  [red]✘[/] Embedded resource '{resourceName}' not found in assembly.");
-        AnsiConsole.MarkupLine("[grey]  Available resources:[/]");
-        foreach (var name in assembly.GetManifestResourceNames())
-            AnsiConsole.MarkupLine($"    [grey]• {name}[/]");
         return;
     }
 
     await AnsiConsole.Progress()
         .StartAsync(async ctx =>
         {
-            var task = ctx.AddTask("[grey]Extracting McpDocMind.Lite.exe...[/]");
-            await using var fileStream = File.Create(targetPath);
-            var buffer = new byte[81920];
-            long totalRead = 0;
-            int bytesRead;
-            while ((bytesRead = await stream.ReadAsync(buffer)) > 0)
+            var task = ctx.AddTask("[grey]Extracting files...[/]");
+            using var archive = new ZipArchive(stream, ZipArchiveMode.Read);
+            var entries = archive.Entries.Where(e => !string.IsNullOrEmpty(e.Name)).ToList();
+            var count = 0;
+            foreach (var entry in entries)
             {
-                await fileStream.WriteAsync(buffer.AsMemory(0, bytesRead));
-                totalRead += bytesRead;
-                task.Value = stream.Length > 0 ? (double)totalRead / stream.Length * 100 : 100;
+                var target = Path.Combine(InstallDir, entry.FullName);
+                var dir = Path.GetDirectoryName(target);
+                if (dir is not null && !Directory.Exists(dir)) Directory.CreateDirectory(dir);
+                entry.ExtractToFile(target, overwrite: true);
+                count++;
+                task.Value = (double)count / entries.Count * 100;
             }
         });
 
-    AnsiConsole.MarkupLine($"  [green]✔[/] Extracted {ExeName} to {InstallDir}");
+    var fileCount = Directory.GetFiles(InstallDir, "*", SearchOption.AllDirectories).Length;
+    AnsiConsole.MarkupLine($"  [green]✔[/] Extracted {fileCount} files to {InstallDir}");
 
     // Phase 2: Configuration
     AnsiConsole.MarkupLine("\n[bold]Phase 2: Tool Registration[/]");
