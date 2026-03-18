@@ -16,7 +16,7 @@ public sealed class ConfigPatcher(string exePath)
     private static readonly string Home = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
     private static readonly System.Text.Encoding Utf8NoBom = new System.Text.UTF8Encoding(false);
 
-    public static string ClaudeCodePath => Path.Combine(Home, ".mcp.json");
+    public static string ClaudeCodePath => Path.Combine(Home, ".claude.json");
     public static string GeminiCliPath => Path.Combine(Home, ".gemini", "settings.json");
     public static string AntigravityPath => Path.Combine(Home, ".gemini", "antigravity", "mcp_config.json");
 

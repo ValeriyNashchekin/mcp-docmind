@@ -4,6 +4,7 @@ using McpDocMind.Lite.Ingestion;
 using McpDocMind.Lite.Search;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using ModelContextProtocol;
 using System.Text.Json;
 
